@@ -111,6 +111,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(SolutionDir)\packages\libiconv.lib.1.16.0.6\build\native\lib\x64\v142\Debug\libiconv.lib;Ws2_32.lib;$(SolutionDir)\packages\openssl-vc141-static-x86_64.1.1.0\build\native\lib\x64\static\Debug\libcrypto.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)\packages\openssl-vc141-static-x86_64.1.1.0\build\native\lib\x64\dynamic\libcrypto-1_1-x64.dll" "$(OutDir)" /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

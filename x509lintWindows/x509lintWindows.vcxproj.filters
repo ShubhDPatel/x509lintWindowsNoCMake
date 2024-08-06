@@ -38,6 +38,9 @@
     <ClInclude Include="asn1_time.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
