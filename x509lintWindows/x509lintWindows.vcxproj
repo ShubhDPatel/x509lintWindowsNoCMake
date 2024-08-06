@@ -24,6 +24,7 @@
     <ProjectGuid>{559d232f-e2d2-4e58-8c85-fea350cfbe4a}</ProjectGuid>
     <RootNamespace>x509lintWindows</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>x509lint</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
