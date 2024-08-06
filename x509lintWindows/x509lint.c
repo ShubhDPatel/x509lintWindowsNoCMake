@@ -27,40 +27,22 @@
 #include "messages.h"
 //#include <iostream>
 
-static int LoadCert(const char *filename, unsigned char **buffer, size_t *buflen)
+static int LoadCert(const char *certData, unsigned char **buffer, size_t *buflen)
 {
-    long size;
-    FILE *f;
+    // Calculate the size of the certificate data
+    long size = strlen(certData);
 
-    f = fopen(filename, "rb");
-    if (f == NULL)
+    // Allocate memory for the buffer
+    *buffer = (unsigned char *)malloc(size);
+    if (*buffer == NULL)
     {
         return -1;
     }
-    if (fseek(f, 0, SEEK_END) != 0)
-    {
-        return -1;
-    }
-    size = ftell(f);
-    if (size == -1)
-    {
-        return -1;
-    }
-    *buffer = (unsigned char*) malloc(size);
-    if (fseek(f, 0, SEEK_SET) != 0)
-    {
-        free(*buffer);
-        *buffer = NULL;
-        return -1;
-    }
-    if (fread(*buffer, 1, size, f) != size)
-    {
-        free(*buffer);
-        *buffer = NULL;
-        return -1;
-    }
-    fclose(f);
 
+    // Copy the certificate data into the buffer
+    memcpy(*buffer, certData, size);
+
+    // Set the buffer length
     *buflen = size;
 
     return 0;
@@ -74,13 +56,13 @@ int main(int argc, char *argv[])
 
     if (argc != 2)
     {
-        printf("Usage: x509lint file\n");
+        printf("Usage: x509lint \"Certificate Contents\"\n");
         exit(1);
     }
 
     if (LoadCert(argv[1], &buffer, &buflen) != 0)
     {
-        fprintf(stderr, "Unable to read certificate\n");
+        fprintf(stderr, "Unable to process certificate data\n");
         exit(1);
     }
     X509 *x509 = GetCert(buffer, buflen, PEM);
